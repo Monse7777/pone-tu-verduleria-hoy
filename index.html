@@ -95,6 +95,71 @@
   .sticky-buy strong{font-size:17px;color:#f2c84b}
 }
 
+
+/* Hero mobile v4 */
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.02fr .98fr;
+  grid-template-areas:"copy visual" "buy visual";
+  column-gap:64px;
+  row-gap:16px;
+  align-items:start
+}
+.hero-copy{grid-area:copy}
+.hero-visual{grid-area:visual;align-self:center}
+.hero-buy{grid-area:buy}
+.hero-photo{aspect-ratio:1/1;max-height:455px}
+.hero-photo img{object-position:center 38%}
+.purchase-card{
+  max-width:470px;
+  margin-top:6px;
+  padding:16px 0 0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  text-align:center
+}
+.purchase-kicker{display:block;text-align:center;font-size:10px}
+.launch-price{display:flex;align-items:baseline;justify-content:center;gap:9px;margin:4px 0 13px}
+.launch-price strong{font-size:43px;line-height:1;color:var(--green);letter-spacing:-.045em}
+.launch-price span{font-size:10px;font-weight:800;color:var(--muted)}
+.purchase-cta{max-width:360px;margin:0 auto;justify-content:center;gap:14px}
+.purchase-note{text-align:center}
+@media(max-width:900px){
+  .hero-grid{
+    grid-template-columns:1fr;
+    grid-template-areas:"copy" "visual" "buy";
+    gap:24px
+  }
+  .hero-visual{width:100%}
+}
+@media(max-width:680px){
+  .hero{padding-top:22px;padding-bottom:34px}
+  .hero-grid{gap:14px}
+  .hero-copy .eyebrow{display:none}
+  .hero-copy h1{font-size:38px;line-height:.98}
+  .hero-copy .lead{font-size:15.5px;line-height:1.4;margin-top:14px}
+  .hero-photo{
+    width:min(78vw,280px);
+    margin:2px auto 0;
+    aspect-ratio:1/1;
+    border-radius:18px;
+    box-shadow:0 10px 26px rgba(26,53,43,.12)
+  }
+  .hero-photo img{object-position:center 36%}
+  .hero-facts{display:none}
+  .purchase-card{margin-top:0;padding-top:2px}
+  .purchase-kicker{font-size:9px;letter-spacing:.13em}
+  .launch-price{margin:3px 0 10px;gap:7px}
+  .launch-price strong{font-size:37px}
+  .launch-price span{font-size:9.5px}
+  .purchase-cta{width:min(100%,330px);min-height:52px}
+  .purchase-note{font-size:10px;margin-top:7px}
+  .sticky-buy{opacity:0;transform:translateY(100%);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+  .sticky-buy.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+}
+
 </style>
 </head>
 <body>
@@ -105,24 +170,21 @@
           <div class="eyebrow">GUÍA DIGITAL · PASO A PASO</div>
           <h1>Poné tu Verdulería Hoy con <em>José</em></h1>
           <p class="lead">Una guía práctica para empezar tu verdulería o mejorar la que ya tenés. Aprendé cuánto dinero necesitás para invertir, qué productos no pueden faltar al comenzar, cómo armar ofertas, comprar mejor, controlar la merma y poner precios con criterio.</p>
-          <div class="hero-facts"><span>55 páginas</span><span>13 capítulos</span><span>Ejercicios prácticos</span></div>
-          <div class="purchase-card">
-            <div class="purchase-price">
-              <div>
-                <span class="purchase-kicker">PRECIO LANZAMIENTO</span>
-                <strong>$12.900</strong>
-              </div>
-              <span class="purchase-detail">ARS<br><small>pago único</small></span>
-            </div>
-            <a class="btn btn-primary purchase-cta" href="#precio">
-              <span>COMPRAR EL LIBRO</span><b aria-hidden="true">→</b>
-            </a>
-            <div class="purchase-note">PDF digital · acceso inmediato · para celular, tablet o computadora</div>
-          </div>
         </div>
         <div class="hero-visual">
           <div class="hero-photo">
             <img id="joseHero" alt="José sosteniendo el libro Poné tu Verdulería Hoy con José" />
+          </div>
+        </div>
+        <div class="hero-buy">
+          <div class="hero-facts"><span>55 páginas</span><span>13 capítulos</span><span>Ejercicios prácticos</span></div>
+          <div class="purchase-card">
+            <span class="purchase-kicker">PRECIO DE LANZAMIENTO</span>
+            <div class="launch-price"><strong>$12.900</strong><span>ARS · pago único</span></div>
+            <a class="btn btn-primary purchase-cta" href="#precio">
+              <span>QUIERO MI COPIA</span><b aria-hidden="true">→</b>
+            </a>
+            <div class="purchase-note">PDF digital · acceso inmediato</div>
           </div>
         </div>
       </div>
@@ -223,7 +285,7 @@
   </main>
 
   <footer class="footer"><div class="wrap footer-inner"><span>© 2026 José · Poné tu Verdulería Hoy</span><span>Libro digital</span></div></footer>
-  <a class="sticky-buy" href="#precio"><span>COMPRAR EL LIBRO</span><strong>$12.900</strong></a>
+  <a class="sticky-buy" href="#precio"><span>QUIERO MI COPIA</span><strong>$12.900</strong></a>
   <script>
 document.querySelectorAll('[data-checkout]').forEach((button)=>{
   button.addEventListener('click',(e)=>{
@@ -249,6 +311,19 @@ document.querySelectorAll('[data-checkout]').forEach((button)=>{
   const img=document.getElementById('joseHero');
   if(img) img.src='data:image/webp;base64,'+parts.join('');
 })().catch(console.error);
+</script>
+
+
+<script>
+(()=> {
+  const sticky=document.querySelector('.sticky-buy');
+  const hero=document.querySelector('.hero');
+  if(!sticky || !hero || !('IntersectionObserver' in window)) return;
+  const mq=window.matchMedia('(max-width:680px)');
+  const update=(visible)=>sticky.classList.toggle('is-visible',mq.matches && !visible);
+  const observer=new IntersectionObserver(([entry])=>update(entry.isIntersecting),{threshold:.08});
+  observer.observe(hero);
+})();
 </script>
 
 </body>
