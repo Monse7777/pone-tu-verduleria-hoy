@@ -236,6 +236,72 @@
   .purchase-note{margin-top:7px;font-size:10px}
 }
 
+
+/* Refinamiento mobile v6 */
+.hero-copy .lead strong{font-weight:800;color:var(--green)}
+.hero-copy .lead em{font-family:Georgia,serif;font-style:italic;color:var(--red)}
+.purchase-cta{font-size:16px;letter-spacing:.055em;isolation:isolate}
+.purchase-cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  background:linear-gradient(110deg,#123f34 0%,#17614f 35%,#123f34 70%,#0e322a 100%);
+  background-size:220% 100%;
+  animation:ctaFlow 3.4s ease-in-out infinite
+}
+.purchase-cta::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:-35%;
+  left:-38%;
+  width:28%;
+  height:170%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.26),transparent);
+  transform:skewX(-18deg);
+  animation:ctaSweep 2.9s ease-in-out infinite
+}
+.purchase-cta{animation:ctaBreath 2.7s ease-in-out infinite}
+@keyframes ctaFlow{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+@keyframes ctaSweep{
+  0%,48%{left:-38%;opacity:0}
+  58%{opacity:1}
+  82%,100%{left:118%;opacity:0}
+}
+@keyframes ctaBreath{
+  0%,100%{transform:translateY(0) scale(1);box-shadow:0 10px 24px rgba(18,63,52,.15)}
+  50%{transform:translateY(-2px) scale(1.012);box-shadow:0 15px 34px rgba(18,63,52,.24)}
+}
+@media(prefers-reduced-motion:reduce){
+  .purchase-cta,.purchase-cta::before,.purchase-cta::after{animation:none}
+}
+@media(max-width:680px){
+  .wrap{width:calc(100% - 48px)}
+  .hero{padding-top:48px;padding-bottom:38px}
+  .hero-grid{gap:15px}
+  .hero-copy h1{font-size:36px;line-height:1.01}
+  .hero-copy .lead{font-size:14.8px;line-height:1.39;margin-top:15px}
+  .hero-photo{
+    width:calc(100% + 20px);
+    max-width:350px;
+    margin:7px auto 2px;
+    position:relative;
+    left:-10px;
+    border-radius:21px
+  }
+  .hero-photo img{object-position:center 25%}
+  .purchase-cta{
+    width:min(100%,350px);
+    min-height:58px;
+    font-size:17px;
+    border-radius:14px
+  }
+}
+
 </style>
 </head>
 <body>
@@ -245,7 +311,7 @@
         <div class="hero-copy">
           <div class="eyebrow">GUÍA DIGITAL · PASO A PASO</div>
           <h1>Poné tu Verdulería Hoy <em>con José</em></h1>
-          <p class="lead">Una guía práctica para empezar tu verdulería o mejorar la que ya tenés. Aprendé cuánto dinero necesitás para invertir, qué productos no pueden faltar al comenzar, cómo armar ofertas, comprar mejor, controlar la merma y poner precios con criterio.</p>
+          <p class="lead">Una guía práctica para <strong>empezar o mejorar tu verdulería.</strong> Aprendé <strong>cuánto invertir</strong>, qué productos no pueden faltar, <em>cómo armar ofertas</em> y cómo comprar y poner precios con más criterio.</p>
         </div>
         <div class="hero-visual">
           <div class="hero-photo">
@@ -262,7 +328,7 @@
             </div>
             <div class="pay-once">Pago único · acceso inmediato</div>
             <a class="btn btn-primary purchase-cta" href="#precio">
-              <span>QUIERO MI COPIA</span><b aria-hidden="true">→</b>
+              <span>QUIERO MI COPIA</span>
             </a>
             <div class="purchase-note">Libro digital en PDF</div>
           </div>
