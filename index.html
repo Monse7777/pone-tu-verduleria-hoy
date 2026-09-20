@@ -30,6 +30,34 @@
 @media(max-width:900px){.hero-circle{width:390px;height:390px}}
 @media(max-width:680px){.hero-visual{min-height:350px}.hero-visual .sun{width:310px;height:310px;top:18px}.hero-circle{width:290px;height:290px}.hero-visual .badge{top:28px;left:18px;font-size:9px}}
 
+
+/* Hero simplificado */
+.hero{padding-top:56px}
+.hero-grid{grid-template-columns:1.02fr .98fr;gap:64px;align-items:center}
+.hero-copy h1{max-width:650px;font-size:clamp(52px,5.5vw,76px);line-height:1.02;letter-spacing:-.045em}
+.hero-copy .lead{max-width:650px;font-size:19px;line-height:1.55;margin-top:22px}
+.hero-visual{min-height:0;display:block}
+.hero-photo{width:min(100%,470px);margin:0 auto;border-radius:28px;overflow:hidden;box-shadow:0 20px 55px rgba(26,53,43,.16);background:transparent}
+.hero-photo img{width:100%;height:auto;display:block}
+.hero-visual .sun,.hero-visual .badge,.hero-circle{display:none!important}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-photo{width:min(100%,520px)}
+}
+@media(max-width:680px){
+  .hero{padding-top:28px}
+  .hero-grid{gap:28px}
+  .hero-copy h1{font-size:46px;line-height:1.02;letter-spacing:-.04em}
+  .hero-copy .lead{font-size:17px;line-height:1.48;margin-top:18px}
+  .hero-facts{gap:7px;margin:18px 0 14px}
+  .hero-facts span{font-size:11px;padding:6px 10px}
+  .price-inline{align-items:center;gap:12px;margin:14px 0 16px}
+  .price-inline span{font-size:10px}
+  .price-inline strong{font-size:44px}
+  .microcopy{font-size:11px;line-height:1.35}
+  .hero-photo{width:100%;border-radius:20px;box-shadow:0 14px 35px rgba(26,53,43,.14)}
+}
+
 </style>
 </head>
 <body>
@@ -38,19 +66,17 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <div class="eyebrow">GUÍA DIGITAL · PASO A PASO</div>
-          <h1>Empezá una verdulería.<br><em>O profesionalizá la que ya tenés.</em></h1>
-          <p class="lead">Aprendé a comprar mejor, entender tus costos, controlar la merma y poner precios con más criterio.</p>
+          <h1>Poné tu Verdulería Hoy con José</h1>
+          <p class="lead">Una guía práctica para empezar tu verdulería o mejorar la que ya tenés. Aprendé a comprar mejor, entender tus costos, controlar la merma y poner precios con criterio.</p>
           <div class="hero-facts"><span>55 páginas</span><span>13 capítulos</span><span>Ejercicios prácticos</span></div>
           <div class="price-inline"><span>LANZAMIENTO</span><strong>$12.900</strong></div>
           <a class="btn btn-primary" href="#precio">QUIERO MI LIBRO DIGITAL</a>
           <div class="microcopy">PDF digital · Acceso inmediato · Para celular, tablet o computadora</div>
         </div>
         <div class="hero-visual">
-          <div class="sun"></div>
-          <div class="hero-circle">
+          <div class="hero-photo">
             <img id="joseHero" alt="José sosteniendo el libro Poné tu Verdulería Hoy con José" />
           </div>
-          <div class="badge">100% DIGITAL</div>
         </div>
       </div>
     </section>
