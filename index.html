@@ -160,6 +160,82 @@
   .sticky-buy.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
 }
 
+
+/* Refinamiento hero mobile v5 */
+.hero-copy h1 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--red)}
+.launch-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 12px;
+  border-radius:999px;
+  background:var(--yellow);
+  color:var(--green);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.12em
+}
+.price-stage{
+  position:relative;
+  display:inline-flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:7px;
+  margin:8px auto 2px;
+  padding:5px 14px 7px
+}
+.price-stage::before{
+  content:"";
+  position:absolute;
+  left:4px;
+  right:4px;
+  bottom:5px;
+  height:42%;
+  border-radius:9px;
+  background:rgba(227,182,62,.34);
+  transform:rotate(-1.3deg)
+}
+.price-stage strong{
+  position:relative;
+  z-index:1;
+  font-size:46px;
+  line-height:.95;
+  letter-spacing:-.055em;
+  color:var(--green)
+}
+.price-currency{
+  position:relative;
+  z-index:1;
+  padding-bottom:5px;
+  font-size:11px;
+  font-weight:900;
+  color:var(--green)
+}
+.pay-once{font-size:10.5px;font-weight:700;color:var(--muted);margin-bottom:12px}
+@media(max-width:680px){
+  .wrap{width:calc(100% - 40px)}
+  .hero{padding-top:32px;padding-bottom:36px}
+  .hero-grid{gap:16px}
+  .hero-copy h1{font-size:36px;line-height:1.01;letter-spacing:-.035em}
+  .hero-copy .lead{font-size:15px;line-height:1.42;margin-top:16px}
+  .hero-photo{
+    width:min(86vw,310px);
+    margin:4px auto 2px;
+    border-radius:20px
+  }
+  .hero-photo img{object-position:center 27%}
+  .purchase-card{padding-top:2px}
+  .price-stage{margin-top:7px}
+  .price-stage strong{font-size:42px}
+  .purchase-cta{
+    width:min(100%,340px);
+    min-height:54px;
+    border-radius:13px;
+    box-shadow:0 10px 25px rgba(18,63,52,.15)
+  }
+  .purchase-note{margin-top:7px;font-size:10px}
+}
+
 </style>
 </head>
 <body>
@@ -168,7 +244,7 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <div class="eyebrow">GUÍA DIGITAL · PASO A PASO</div>
-          <h1>Poné tu Verdulería Hoy con <em>José</em></h1>
+          <h1>Poné tu Verdulería Hoy <em>con José</em></h1>
           <p class="lead">Una guía práctica para empezar tu verdulería o mejorar la que ya tenés. Aprendé cuánto dinero necesitás para invertir, qué productos no pueden faltar al comenzar, cómo armar ofertas, comprar mejor, controlar la merma y poner precios con criterio.</p>
         </div>
         <div class="hero-visual">
@@ -179,12 +255,16 @@
         <div class="hero-buy">
           <div class="hero-facts"><span>55 páginas</span><span>13 capítulos</span><span>Ejercicios prácticos</span></div>
           <div class="purchase-card">
-            <span class="purchase-kicker">PRECIO DE LANZAMIENTO</span>
-            <div class="launch-price"><strong>$12.900</strong><span>ARS · pago único</span></div>
+            <span class="launch-pill">PRECIO LANZAMIENTO</span>
+            <div class="price-stage">
+              <strong>$12.900</strong>
+              <span class="price-currency">ARS</span>
+            </div>
+            <div class="pay-once">Pago único · acceso inmediato</div>
             <a class="btn btn-primary purchase-cta" href="#precio">
               <span>QUIERO MI COPIA</span><b aria-hidden="true">→</b>
             </a>
-            <div class="purchase-note">PDF digital · acceso inmediato</div>
+            <div class="purchase-note">Libro digital en PDF</div>
           </div>
         </div>
       </div>
