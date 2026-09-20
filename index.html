@@ -302,6 +302,26 @@
   }
 }
 
+
+/* Sección qué incluye */
+.includes-section{background:var(--paper)}
+.includes-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:54px;align-items:center}
+.includes-media img{width:100%;border-radius:24px;box-shadow:var(--shadow)}
+.includes-copy>p{font-size:17px;color:#53625e;max-width:610px;margin:16px 0 0}
+.includes-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.includes-list>div{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;background:var(--cream);border:1px solid var(--line);border-radius:14px;font-size:13px;line-height:1.4;color:#29473f}
+.includes-list i{display:grid;place-items:center;flex:0 0 22px;width:22px;height:22px;border-radius:50%;background:var(--yellow);color:var(--green);font-style:normal;font-weight:900;font-size:12px}
+@media(max-width:900px){.includes-grid{grid-template-columns:1fr;gap:30px}.includes-media{order:2}.includes-copy{order:1}}
+@media(max-width:680px){
+  .includes-section{padding-top:42px;padding-bottom:42px}
+  .includes-grid{gap:24px}
+  .includes-copy h2{font-size:34px}
+  .includes-copy>p{font-size:15px;line-height:1.5}
+  .includes-list{grid-template-columns:1fr;gap:8px;margin-top:18px}
+  .includes-list>div{font-size:13px;padding:12px 13px;border-radius:13px}
+  .includes-media img{border-radius:20px}
+}
+
 </style>
 </head>
 <body>
@@ -336,14 +356,6 @@
       </div>
     </section>
 
-    <section class="quick-strip">
-      <div class="wrap quick-grid">
-        <div><b>🌱 Para empezar</b><span>Desde ubicación y primera compra.</span></div>
-        <div><b>📈 Para mejorar</b><span>Números, precios y organización.</span></div>
-        <div><b>🧮 Para profesionalizarte</b><span>Menos intuición. Más criterio.</span></div>
-      </div>
-    </section>
-
     <section class="section video-section">
       <div class="wrap video-grid">
         <div class="video-frame">
@@ -355,6 +367,30 @@
           <p>Este libro sirve tanto para quien quiere abrir su primera verdulería como para quien ya vende y quiere entender mejor qué pasa con la plata del negocio.</p>
           <div class="quote-card">“Ser buen verdulero no es solamente saber elegir mercadería. También hay que conocer los números.”</div>
           <ul class="check-list"><li>Libro digital, no físico.</li><li>Explicado simple y con ejemplos.</li><li>Con tareas para llevarlo a la práctica.</li></ul>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section includes-section">
+      <div class="wrap includes-grid">
+        <div class="includes-media">
+          <img src="assets/libro-celular.webp" alt="Libro Poné tu Verdulería Hoy con José junto a un celular" />
+        </div>
+        <div class="includes-copy">
+          <div class="eyebrow">QUÉ INCLUYE EL LIBRO</div>
+          <h2>Una guía para <em>hacer mejor el oficio.</em></h2>
+          <p>Contenido práctico para empezar con más criterio o profesionalizar la verdulería que ya tenés.</p>
+          <div class="includes-list">
+            <div><i>✓</i><span>Libro digital de <strong>55 páginas</strong>.</span></div>
+            <div><i>✓</i><span><strong>13 capítulos</strong> explicados paso a paso.</span></div>
+            <div><i>✓</i><span><strong>Tareas accionables</strong> al final de cada capítulo.</span></div>
+            <div><i>✓</i><span><strong>Acceso a la Calculadora de José</strong> como herramienta complementaria.</span></div>
+            <div><i>✓</i><span>Aprendé a calcular <strong>gastos, costos y ganancias</strong>.</span></div>
+            <div><i>✓</i><span>Qué productos <strong>conviene tener</strong> y cuáles evitar al principio.</span></div>
+            <div><i>✓</i><span>Cómo <strong>armar ofertas</strong> sin regalar tu ganancia.</span></div>
+            <div><i>✓</i><span><strong>Profesionalizá tu oficio</strong> entendiendo mejor los números del negocio.</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -388,19 +424,6 @@
           <div class="page left-page"><img src="assets/page-recargo.webp" alt="Página sobre recargo y margen" /></div>
           <div class="book-spine"></div>
           <div class="page right-page"><img src="assets/page-tarea.webp" alt="Página de ejercicio práctico" /></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section calculator-section">
-      <div class="wrap calculator-grid">
-        <div class="calc-phone"><img src="assets/calculadora.webp" alt="La Calculadora de José" /></div>
-        <div class="calc-copy">
-          <div class="eyebrow light">LA CALCULADORA DE JOSÉ</div>
-          <h2>Aprendé el criterio. Después hacé las cuentas más fácil.</h2>
-          <p>El libro te explica qué significan los números y la calculadora te ayuda a llevarlos a una compra real.</p>
-          <div class="calc-tags"><span>Costos</span><span>Merma</span><span>Precio</span><span>Ganancia</span></div>
-          <a class="btn btn-ghost" href="https://la-calculadora-de-jose.vercel.app/" target="_blank" rel="noopener">PROBAR LA CALCULADORA</a>
         </div>
       </div>
     </section>
