@@ -431,6 +431,123 @@
   .section-purchase .purchase-note{font-size:10.5px}
 }
 
+
+/* Oferta final v2 */
+.offer-section{background:#eee7d9}
+.offer-wrap{
+  max-width:980px;
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  gap:54px;
+  align-items:center
+}
+.offer-copy h2{max-width:650px}
+.offer-copy h2 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--red)}
+.offer-copy>p{
+  max-width:650px;
+  font-size:17px;
+  line-height:1.58;
+  color:#53625e;
+  margin:18px 0 0
+}
+.offer-copy>p strong{color:var(--ink);font-weight:800}
+.offer-copy>p em{font-family:Georgia,serif;font-style:italic;color:var(--red)}
+.offer-list{
+  list-style:none;
+  padding:0;
+  display:grid;
+  gap:10px;
+  margin:22px 0 0
+}
+.offer-list li{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  color:#29473f;
+  font-size:14px;
+  line-height:1.45
+}
+.offer-list li:before{
+  content:"✓";
+  display:grid;
+  place-items:center;
+  flex:0 0 22px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--yellow);
+  color:var(--green);
+  font-size:12px;
+  font-weight:900;
+  margin-top:1px
+}
+.offer-list strong{font-weight:800}
+.final-purchase{
+  width:100%;
+  max-width:650px;
+  margin:24px 0 0;
+  background:rgba(251,248,239,.78)
+}
+.final-purchase .purchase-cta{max-width:none}
+.offer-mockup{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:24px 18px 34px
+}
+.book-mockup{
+  position:relative;
+  width:min(300px,78vw);
+  transform:perspective(900px) rotateY(-8deg) rotateZ(-1.5deg);
+  filter:drop-shadow(0 28px 28px rgba(18,63,52,.18))
+}
+.book-mockup:before{
+  content:"";
+  position:absolute;
+  top:8px;
+  right:-14px;
+  width:18px;
+  height:calc(100% - 16px);
+  background:linear-gradient(90deg,#ece7d9,#fff 45%,#d8d1c2);
+  border-radius:0 6px 6px 0;
+  transform:skewY(-2deg);
+  z-index:-1
+}
+.book-mockup:after{
+  content:"";
+  position:absolute;
+  left:10px;
+  right:-8px;
+  bottom:-12px;
+  height:15px;
+  background:linear-gradient(#f8f4e9,#ddd5c6);
+  border-radius:0 0 6px 6px;
+  transform:skewX(-25deg);
+  z-index:-1
+}
+.book-mockup img{
+  display:block;
+  width:100%;
+  aspect-ratio:auto;
+  border-radius:3px 8px 8px 3px;
+  box-shadow:0 10px 25px rgba(18,63,52,.12)
+}
+@media(max-width:900px){
+  .offer-wrap{grid-template-columns:1fr;gap:22px}
+  .offer-copy{order:1}
+  .offer-mockup{order:2;padding-top:10px}
+}
+@media(max-width:680px){
+  .offer-section{padding-top:44px;padding-bottom:44px}
+  .offer-copy h2{font-size:36px;line-height:1.02}
+  .offer-copy>p{font-size:15px;line-height:1.52}
+  .offer-list{margin-top:18px;gap:9px}
+  .offer-list li{font-size:13px}
+  .final-purchase{margin-top:20px}
+  .offer-mockup{padding:8px 0 20px}
+  .book-mockup{width:min(250px,68vw)}
+}
+
 </style>
 </head>
 <body>
@@ -551,31 +668,36 @@
 
     <section class="section offer-section" id="precio">
       <div class="wrap offer-wrap">
-        <div class="offer-cover">
-          <img src="assets/libro-celular-section.webp" alt="Libro Poné tu Verdulería Hoy con José junto a un celular" />
-        </div>
         <div class="offer-copy">
           <div class="eyebrow">LLEVATE EL LIBRO</div>
           <h2>Tu primer paso,<br><em>de la mano de José.</em></h2>
-          <p>Un libro claro y práctico para el que quiere abrir su primera verdulería y también para el que ya vende, pero quiere entender mejor sus números. Aprendé a comprar con más criterio, calcular costos, ordenar precios y evitar errores que te hacen perder plata.</p>
-
-          <div class="offer-price-row">
-            <span class="launch-pill">PRECIO LANZAMIENTO</span>
-            <div class="offer-price"><strong>$12.900</strong><span>ARS</span></div>
-          </div>
-          <div class="offer-payonce">Pago único · acceso inmediato</div>
+          <p>Un libro claro y práctico para el que quiere <strong>abrir su primera verdulería</strong> o para el que ya vende y quiere <strong>ordenar mejor sus números</strong>. Aprendé a <strong>comprar con criterio</strong>, <strong>calcular costos y ganancias</strong>, poner precios sin regalar margen y entender si <em>realmente estás ganando plata.</em></p>
 
           <ul class="offer-list">
-            <li>55 páginas prácticas.</li>
-            <li>13 capítulos explicados paso a paso.</li>
-            <li>Ejercicios accionables al final de cada capítulo.</li>
-            <li>Acceso a la Calculadora de José.</li>
-            <li>Ideas para comprar mejor y poner precios con criterio.</li>
-            <li>Consejos para evitar errores clásicos del rubro.</li>
+            <li><strong>55 páginas y 13 capítulos</strong> explicados paso a paso.</li>
+            <li><strong>Tareas prácticas</strong> al final de cada capítulo.</li>
+            <li><strong>Acceso a la Calculadora de José</strong> como herramienta de apoyo.</li>
+            <li>Consejos para <strong>comprar mejor, poner precios y evitar errores clásicos</strong>.</li>
           </ul>
 
-          <a class="btn btn-primary btn-wide checkout-button" href="#" data-checkout>QUIERO MI COPIA</a>
-          <div class="offer-format">PDF digital · acceso inmediato</div>
+          <div class="section-purchase final-purchase">
+            <div class="section-purchase-top">
+              <span class="launch-pill">PRECIO LANZAMIENTO</span>
+              <div class="price-stage">
+                <strong>$12.900</strong>
+                <span class="price-currency">ARS</span>
+              </div>
+            </div>
+            <div class="pay-once">Pago único · acceso inmediato</div>
+            <a class="btn btn-primary purchase-cta checkout-button" href="#" data-checkout><span>QUIERO MI COPIA</span></a>
+            <div class="purchase-note">PDF digital · acceso inmediato</div>
+          </div>
+        </div>
+
+        <div class="offer-mockup" aria-label="Mockup del libro Poné tu Verdulería Hoy con José">
+          <div class="book-mockup">
+            <img src="assets/cover.webp" alt="Portada del libro Poné tu Verdulería Hoy con José" />
+          </div>
         </div>
       </div>
     </section>
