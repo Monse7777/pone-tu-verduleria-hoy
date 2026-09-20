@@ -21,6 +21,15 @@
 @media(max-width:900px){.hero-grid,.video-grid,.numbers-grid,.content-grid,.calculator-grid{grid-template-columns:1fr}.hero-visual{max-width:550px;width:100%;margin:auto}.video-grid{gap:38px}.content-grid{gap:34px}.calc-phone{max-width:300px}.quick-grid{grid-template-columns:1fr 1fr 1fr}.section{padding:64px 0}}
 @media(max-width:680px){body{padding-bottom:62px}.wrap{width:min(100% - 28px,1120px)}.section{padding:48px 0}.hero{padding-top:34px}.hero-grid{gap:4px}h1{font-size:43px}.lead{font-size:17px;margin-top:18px}.hero-facts{margin:16px 0}.price-inline{margin:15px 0}.price-inline strong{font-size:42px}.btn{width:100%}.hero-visual{min-height:405px}.sun{width:320px;height:320px;top:28px}.cover-card{width:225px}.phone-mockup{width:124px;right:1px;bottom:2px}.badge{top:70px;left:0;font-size:9px}.quick-grid{grid-template-columns:1fr}.quick-grid div{padding:12px 2px;border-right:0;border-bottom:1px solid rgba(255,255,255,.11)}.quick-grid div:last-child{border-bottom:0}.quick-grid b,.quick-grid span{display:inline;font-size:12px}.quick-grid b{margin-right:5px}.video-frame{width:220px;border-width:8px}.video-copy h2,.numbers-copy h2,.content-grid h2,.calc-copy h2,.offer-copy h2{font-size:36px}.video-copy p,.numbers-copy p,.calc-copy p,.offer-copy p{font-size:16px}.quote-card{font-size:18px}.numbers-cards{grid-template-columns:1fr 1fr}.numbers-cards article{padding:15px}.numbers-cards span{font-size:12px}.numbers-cards p{font-size:12px}.content-grid>div:first-child{margin-bottom:6px}.topic-list{margin-top:18px}.topic-list span{font-size:11px;padding:6px 9px}.open-book{grid-template-columns:1fr 4px 1fr}.calculator-grid{gap:30px}.calc-phone{max-width:240px}.calc-copy{text-align:left}.offer-wrap{grid-template-columns:.55fr 1.45fr;padding:19px;gap:18px}.offer-cover{align-self:start}.offer-price strong{font-size:46px}.offer-copy h2{font-size:30px}.offer-copy p,.offer-list{font-size:13px}.faq-section{padding-bottom:30px}.faq-wrap details{padding:14px 15px}.footer-inner{flex-direction:column;gap:4px}.sticky-buy{display:flex;position:fixed;left:0;bottom:0;width:100%;height:62px;background:var(--yellow);color:var(--green);z-index:90;align-items:center;justify-content:space-between;padding:9px 15px;box-shadow:0 -8px 25px rgba(18,63,52,.16)}.sticky-buy span{font-size:9px;text-transform:uppercase;letter-spacing:.09em}.sticky-buy strong{font-size:13px}}
 
+
+/* Hero José */
+.hero-visual{position:relative;min-height:560px;display:grid;place-items:center}
+.hero-circle{position:relative;z-index:2;width:430px;height:430px;border-radius:50%;overflow:hidden;box-shadow:var(--shadow);border:8px solid rgba(255,255,255,.72);background:#e9dfbd}
+.hero-circle img{width:100%;height:100%;object-fit:cover;object-position:center 46%}
+.hero-visual .badge{z-index:3;left:38px;top:88px}
+@media(max-width:900px){.hero-circle{width:390px;height:390px}}
+@media(max-width:680px){.hero-visual{min-height:350px}.hero-visual .sun{width:310px;height:310px;top:18px}.hero-circle{width:290px;height:290px}.hero-visual .badge{top:28px;left:18px;font-size:9px}}
+
 </style>
 </head>
 <body>
@@ -38,8 +47,9 @@
         </div>
         <div class="hero-visual">
           <div class="sun"></div>
-          <img class="cover-card" src="assets/cover.webp" alt="Portada de Poné tu Verdulería Hoy con José" />
-          <div class="phone-mockup"><div class="phone-notch"></div><img src="assets/cover.webp" alt="Libro digital en celular" /></div>
+          <div class="hero-circle">
+            <img id="joseHero" alt="José sosteniendo el libro Poné tu Verdulería Hoy con José" />
+          </div>
           <div class="badge">100% DIGITAL</div>
         </div>
       </div>
@@ -152,5 +162,21 @@ document.querySelectorAll('[data-checkout]').forEach((button)=>{
 });
 
 </script>
+
+<script>
+(async()=>{
+  const parts=await Promise.all([
+    'assets/jose_tiny_01.txt',
+    'assets/jose_tiny_02.txt',
+    'assets/jose_tiny_03.txt',
+    'assets/jose_tiny_04.txt',
+    'assets/jose_tiny_05.txt',
+    'assets/jose_tiny_06.txt'
+  ].map(async u => (await (await fetch(u)).text()).trim()));
+  const img=document.getElementById('joseHero');
+  if(img) img.src='data:image/webp;base64,'+parts.join('');
+})().catch(console.error);
+</script>
+
 </body>
 </html>
