@@ -398,7 +398,7 @@
     <section class="section includes-section">
       <div class="wrap includes-grid">
         <div class="includes-media">
-          <img id="bookPhoneImage" alt="Libro Poné tu Verdulería Hoy con José junto a un celular" />
+          <img src="assets/libro-celular-section.webp" alt="Libro Poné tu Verdulería Hoy con José junto a un celular" />
         </div>
         <div class="includes-copy">
           <div class="eyebrow">QUÉ INCLUYE EL LIBRO</div>
@@ -518,26 +518,6 @@ document.querySelectorAll('[data-checkout]').forEach((button)=>{
 })();
 </script>
 
-
-<script>
-(async()=>{
-  const files=[
-    'assets/libro_section_01.txt',
-    'assets/libro_section_02.txt',
-    'assets/libro_section_03.txt',
-    'assets/libro_section_04.txt',
-    'assets/libro_section_05.txt',
-    'assets/libro_section_06.txt'
-  ];
-  const parts=await Promise.all(files.map(async url=>{
-    const res=await fetch(url,{cache:'force-cache'});
-    if(!res.ok) throw new Error('No se pudo cargar '+url);
-    return (await res.text()).trim();
-  }));
-  const img=document.getElementById('bookPhoneImage');
-  if(img) img.src='data:image/webp;base64,'+parts.join('');
-})().catch(console.error);
-</script>
 
 </body>
 </html>
