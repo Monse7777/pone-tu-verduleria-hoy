@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Poné tu Verdulería Hoy con José</title>
+  <meta name="description" content="Una guía digital para empezar una verdulería o profesionalizar la que ya tenés. Costos, merma, precios, compras, ventas y organización del negocio." />
+  <meta name="theme-color" content="#123f34" />
+  <style>
+:root{--cream:#f4efe2;--paper:#fbf8ef;--green:#123f34;--yellow:#e3b63e;--red:#a63d2f;--ink:#18342e;--muted:#6f746d;--line:rgba(18,63,52,.16);--shadow:0 24px 70px rgba(26,53,43,.17)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}img{max-width:100%;display:block}a{text-decoration:none;color:inherit}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.section{padding:78px 0}.eyebrow{font-size:11px;letter-spacing:.17em;font-weight:900;color:var(--red);margin-bottom:15px}.eyebrow.light{color:#f0c957}h1,h2{margin:0;color:var(--green);line-height:.98;letter-spacing:-.045em}h1{font-size:clamp(46px,6vw,78px)}h2{font-size:clamp(38px,4.7vw,60px)}h1 em,h2 em{font-family:Georgia,serif;font-weight:400;color:var(--red)}
+.hero{padding-top:60px;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}.lead{font-size:21px;max-width:650px;margin:24px 0 0}.hero-facts{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.hero-facts span,.topic-list span,.calc-tags span{border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800}.price-inline{display:flex;align-items:end;gap:14px;margin:18px 0}.price-inline span{font-size:11px;font-weight:900;letter-spacing:.12em;color:var(--red)}.price-inline strong{font-size:48px;line-height:1;color:var(--green)}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 24px;border-radius:10px;font-size:14px;font-weight:900;letter-spacing:.04em;border:2px solid transparent}.btn-primary{background:var(--green);color:#fff}.btn-ghost{border-color:#f3d56e;color:#fff}.btn-wide{width:100%}.microcopy{font-size:12px;color:var(--muted);margin-top:10px}
+.hero-visual{position:relative;min-height:560px}.sun{position:absolute;width:440px;height:440px;border-radius:50%;background:rgba(227,182,62,.22);left:50%;top:38px;transform:translateX(-50%)}.cover-card{position:absolute;width:330px;left:50%;top:10px;transform:translateX(-58%) rotate(-3deg);box-shadow:var(--shadow)}.phone-mockup{position:absolute;width:165px;right:15px;bottom:18px;background:#151b19;border:9px solid #151b19;border-radius:30px;padding:8px;box-shadow:var(--shadow);transform:rotate(5deg)}.phone-mockup img{border-radius:17px}.phone-notch{width:64px;height:7px;background:#343936;border-radius:8px;margin:0 auto 7px}.badge{position:absolute;left:4px;top:105px;background:var(--yellow);border-radius:10px;padding:10px 12px;font-size:11px;font-weight:900;box-shadow:0 12px 28px rgba(18,63,52,.13)}
+.quick-strip{background:var(--green);color:#fff}.quick-grid{display:grid;grid-template-columns:repeat(3,1fr)}.quick-grid div{padding:22px 26px;border-right:1px solid rgba(255,255,255,.13)}.quick-grid div:last-child{border-right:0}.quick-grid b{display:block;color:#f0c957;margin-bottom:3px}.quick-grid span{font-size:13px;color:#d8e4df}
+.video-section{background:var(--paper)}.video-grid{display:grid;grid-template-columns:.65fr 1.35fr;gap:62px;align-items:center}.video-frame{width:min(310px,100%);aspect-ratio:9/16;margin:auto;border:10px solid var(--green);border-radius:27px;padding:8px;background:#101b18;box-shadow:var(--shadow)}.video-inner{height:100%;border-radius:17px;background:linear-gradient(165deg,#264f43,#102f27);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px}.play{width:62px;height:62px;border-radius:50%;background:var(--yellow);color:var(--green);display:grid;place-items:center;font-size:21px;margin-bottom:15px}.video-inner small{opacity:.7;margin-top:7px}.video-copy p,.numbers-copy p,.calc-copy p,.offer-copy p{font-size:17px;color:#53625e}.quote-card{border-left:5px solid var(--yellow);background:var(--cream);padding:16px 18px;font:italic 20px/1.35 Georgia,serif;margin:22px 0}.check-list{padding:0;list-style:none;display:grid;gap:8px}.check-list li:before{content:'✓';color:var(--red);font-weight:900;margin-right:8px}
+.numbers-section,.calculator-section{background:var(--green);color:#fff}.numbers-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:46px;align-items:start}.numbers-copy h2,.calc-copy h2{color:#fff}.numbers-copy h2 em{color:#f0c957}.numbers-copy p,.calc-copy p{color:#d4e0db}.numbers-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.numbers-cards article{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:20px;border-radius:13px}.numbers-cards article.highlight{background:var(--yellow);color:var(--green)}.numbers-cards span{display:block;font-size:14px;font-weight:900;letter-spacing:.07em;margin-bottom:7px}.numbers-cards p{margin:0;font-size:13px}
+.content-section{background:#eae4d6}.content-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:48px;align-items:center}.topic-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}.topic-list span{background:var(--paper)}.open-book{display:grid;grid-template-columns:1fr 7px 1fr;align-items:center;perspective:1200px;filter:drop-shadow(0 24px 24px rgba(18,63,52,.18))}.page{background:#fff;overflow:hidden}.left-page{transform:rotateY(7deg);transform-origin:right center}.right-page{transform:rotateY(-7deg);transform-origin:left center}.book-spine{width:7px;height:94%;background:linear-gradient(90deg,#d2ccbe,#fff,#d2ccbe)}
+.calculator-grid{display:grid;grid-template-columns:.62fr 1.38fr;gap:54px;align-items:center}.calc-phone{max-width:330px;margin:auto;background:#fff;padding:9px;border-radius:22px;box-shadow:0 28px 70px rgba(0,0,0,.28);transform:rotate(-2deg)}.calc-phone img{border-radius:14px}.calc-tags{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0}.calc-tags span{border-color:rgba(255,255,255,.2)}
+.offer-section{background:#ebe4d5}.offer-wrap{max-width:880px;display:grid;grid-template-columns:.62fr 1.38fr;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:36px;gap:38px;align-items:center;box-shadow:var(--shadow)}.offer-cover img{box-shadow:0 18px 40px rgba(18,63,52,.18);transform:rotate(-2deg)}.offer-price{display:flex;align-items:end;gap:9px;margin:18px 0}.offer-price strong{font-size:66px;line-height:1;letter-spacing:-.06em}.offer-price span{font-weight:900;padding-bottom:8px}.offer-list{list-style:none;padding:0;display:grid;gap:7px;margin:20px 0}.checkout-note{font-size:11px;color:var(--muted);margin-top:9px;text-align:center}
+.faq-wrap{max-width:820px}.faq-wrap details{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:16px 18px;margin-bottom:9px}.faq-wrap summary{font-weight:900;cursor:pointer}.faq-wrap p{margin-bottom:0;color:#53625e}.footer{background:#0a2c24;color:#a8beb6;padding:22px 0;font-size:12px}.footer-inner{display:flex;justify-content:space-between}.sticky-buy{display:none}
+@media(max-width:900px){.hero-grid,.video-grid,.numbers-grid,.content-grid,.calculator-grid{grid-template-columns:1fr}.hero-visual{max-width:550px;width:100%;margin:auto}.video-grid{gap:38px}.content-grid{gap:34px}.calc-phone{max-width:300px}.quick-grid{grid-template-columns:1fr 1fr 1fr}.section{padding:64px 0}}
+@media(max-width:680px){body{padding-bottom:62px}.wrap{width:min(100% - 28px,1120px)}.section{padding:48px 0}.hero{padding-top:34px}.hero-grid{gap:4px}h1{font-size:43px}.lead{font-size:17px;margin-top:18px}.hero-facts{margin:16px 0}.price-inline{margin:15px 0}.price-inline strong{font-size:42px}.btn{width:100%}.hero-visual{min-height:405px}.sun{width:320px;height:320px;top:28px}.cover-card{width:225px}.phone-mockup{width:124px;right:1px;bottom:2px}.badge{top:70px;left:0;font-size:9px}.quick-grid{grid-template-columns:1fr}.quick-grid div{padding:12px 2px;border-right:0;border-bottom:1px solid rgba(255,255,255,.11)}.quick-grid div:last-child{border-bottom:0}.quick-grid b,.quick-grid span{display:inline;font-size:12px}.quick-grid b{margin-right:5px}.video-frame{width:220px;border-width:8px}.video-copy h2,.numbers-copy h2,.content-grid h2,.calc-copy h2,.offer-copy h2{font-size:36px}.video-copy p,.numbers-copy p,.calc-copy p,.offer-copy p{font-size:16px}.quote-card{font-size:18px}.numbers-cards{grid-template-columns:1fr 1fr}.numbers-cards article{padding:15px}.numbers-cards span{font-size:12px}.numbers-cards p{font-size:12px}.content-grid>div:first-child{margin-bottom:6px}.topic-list{margin-top:18px}.topic-list span{font-size:11px;padding:6px 9px}.open-book{grid-template-columns:1fr 4px 1fr}.calculator-grid{gap:30px}.calc-phone{max-width:240px}.calc-copy{text-align:left}.offer-wrap{grid-template-columns:.55fr 1.45fr;padding:19px;gap:18px}.offer-cover{align-self:start}.offer-price strong{font-size:46px}.offer-copy h2{font-size:30px}.offer-copy p,.offer-list{font-size:13px}.faq-section{padding-bottom:30px}.faq-wrap details{padding:14px 15px}.footer-inner{flex-direction:column;gap:4px}.sticky-buy{display:flex;position:fixed;left:0;bottom:0;width:100%;height:62px;background:var(--yellow);color:var(--green);z-index:90;align-items:center;justify-content:space-between;padding:9px 15px;box-shadow:0 -8px 25px rgba(18,63,52,.16)}.sticky-buy span{font-size:9px;text-transform:uppercase;letter-spacing:.09em}.sticky-buy strong{font-size:13px}}
+
+</style>
+</head>
+<body>
+  <main id="top">
+    <section class="hero section">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">GUÍA DIGITAL · PASO A PASO</div>
+          <h1>Empezá una verdulería.<br><em>O profesionalizá la que ya tenés.</em></h1>
+          <p class="lead">Aprendé a comprar mejor, entender tus costos, controlar la merma y poner precios con más criterio.</p>
+          <div class="hero-facts"><span>55 páginas</span><span>13 capítulos</span><span>Ejercicios prácticos</span></div>
+          <div class="price-inline"><span>LANZAMIENTO</span><strong>$12.900</strong></div>
+          <a class="btn btn-primary" href="#precio">QUIERO MI LIBRO DIGITAL</a>
+          <div class="microcopy">PDF digital · Acceso inmediato · Para celular, tablet o computadora</div>
+        </div>
+        <div class="hero-visual">
+          <div class="sun"></div>
+          <img class="cover-card" src="assets/cover.webp" alt="Portada de Poné tu Verdulería Hoy con José" />
+          <div class="phone-mockup"><div class="phone-notch"></div><img src="assets/cover.webp" alt="Libro digital en celular" /></div>
+          <div class="badge">100% DIGITAL</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-strip">
+      <div class="wrap quick-grid">
+        <div><b>🌱 Para empezar</b><span>Desde ubicación y primera compra.</span></div>
+        <div><b>📈 Para mejorar</b><span>Números, precios y organización.</span></div>
+        <div><b>🧮 Para profesionalizarte</b><span>Menos intuición. Más criterio.</span></div>
+      </div>
+    </section>
+
+    <section class="section video-section">
+      <div class="wrap video-grid">
+        <div class="video-frame">
+          <div class="video-inner"><span class="play">▶</span><strong>VIDEO DE JOSÉ</strong><small>Mostrando el libro en el celular</small></div>
+        </div>
+        <div class="video-copy">
+          <div class="eyebrow">JOSÉ TE LO CUENTA</div>
+          <h2>El oficio también <em>se profesionaliza.</em></h2>
+          <p>Este libro sirve tanto para quien quiere abrir su primera verdulería como para quien ya vende y quiere entender mejor qué pasa con la plata del negocio.</p>
+          <div class="quote-card">“Ser buen verdulero no es solamente saber elegir mercadería. También hay que conocer los números.”</div>
+          <ul class="check-list"><li>Libro digital, no físico.</li><li>Explicado simple y con ejemplos.</li><li>Con tareas para llevarlo a la práctica.</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="numbers-section section">
+      <div class="wrap numbers-grid">
+        <div class="numbers-copy">
+          <div class="eyebrow light">PROFESIONALIZAR AL VERDULERO</div>
+          <h2>Dejá de manejar tu verdulería <em>a ojo.</em></h2>
+          <p>Comprender los números puede cambiar cómo comprás, cómo vendés y cuánto te queda.</p>
+        </div>
+        <div class="numbers-cards">
+          <article><span>COSTO REAL</span><p>Cuánto te terminó costando de verdad cada kilo vendible.</p></article>
+          <article><span>MERMA</span><p>Lo que compraste y no pudiste vender también cuesta.</p></article>
+          <article class="highlight"><span>RECARGO ≠ MARGEN</span><p>Aprendé la diferencia para no creer que ganás más de lo que realmente ganás.</p></article>
+          <article><span>PRECIO</span><p>Que no salga solamente de copiar al negocio de al lado.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section">
+      <div class="wrap content-grid">
+        <div>
+          <div class="eyebrow">QUÉ VAS A ENCONTRAR</div>
+          <h2>Una guía para tomar mejores decisiones.</h2>
+          <div class="topic-list">
+            <span>Ubicación y capital inicial</span><span>Mercado y proveedores</span><span>Primera compra y productos</span><span>Costos, merma y precios</span><span>Ofertas y promoción</span><span>Caja y primeros 30 días</span>
+          </div>
+        </div>
+        <div class="open-book">
+          <div class="page left-page"><img src="assets/page-recargo.webp" alt="Página sobre recargo y margen" /></div>
+          <div class="book-spine"></div>
+          <div class="page right-page"><img src="assets/page-tarea.webp" alt="Página de ejercicio práctico" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section calculator-section">
+      <div class="wrap calculator-grid">
+        <div class="calc-phone"><img src="assets/calculadora.webp" alt="La Calculadora de José" /></div>
+        <div class="calc-copy">
+          <div class="eyebrow light">LA CALCULADORA DE JOSÉ</div>
+          <h2>Aprendé el criterio. Después hacé las cuentas más fácil.</h2>
+          <p>El libro te explica qué significan los números y la calculadora te ayuda a llevarlos a una compra real.</p>
+          <div class="calc-tags"><span>Costos</span><span>Merma</span><span>Precio</span><span>Ganancia</span></div>
+          <a class="btn btn-ghost" href="https://la-calculadora-de-jose.vercel.app/" target="_blank" rel="noopener">PROBAR LA CALCULADORA</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section offer-section" id="precio">
+      <div class="wrap offer-wrap">
+        <div class="offer-cover"><img src="assets/cover.webp" alt="Portada del libro" /></div>
+        <div class="offer-copy">
+          <div class="eyebrow">PRECIO DE LANZAMIENTO</div>
+          <h2>Poné tu Verdulería Hoy con José</h2>
+          <div class="offer-price"><strong>$12.900</strong><span>ARS</span></div>
+          <p>Pago único. Libro digital en PDF con acceso después de la compra.</p>
+          <ul class="offer-list"><li>✓ 55 páginas</li><li>✓ 13 capítulos paso a paso</li><li>✓ Ejercicios prácticos</li><li>✓ Para empezar o profesionalizar tu verdulería</li></ul>
+          <a class="btn btn-primary btn-wide checkout-button" href="#" data-checkout>QUIERO EL LIBRO DE JOSÉ</a>
+          <div class="checkout-note">El botón queda listo para conectar al checkout de Hotmart</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section section">
+      <div class="wrap faq-wrap">
+        <div class="eyebrow">PREGUNTAS FRECUENTES</div>
+        <details><summary>¿Es un libro físico?</summary><p>No. Es un libro 100% digital en PDF.</p></details>
+        <details><summary>¿Sirve si ya tengo una verdulería?</summary><p>Sí. Incluye costos, merma, precios, compras, promoción, caja y organización para ayudarte a profesionalizar decisiones del negocio.</p></details>
+        <details><summary>¿Cómo lo recibo?</summary><p>Después de confirmar el pago, el acceso se entrega digitalmente.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap footer-inner"><span>© 2026 José · Poné tu Verdulería Hoy</span><span>Libro digital</span></div></footer>
+  <a class="sticky-buy" href="#precio"><span>Libro digital</span><strong>COMPRAR · $12.900</strong></a>
+  <script>
+document.querySelectorAll('[data-checkout]').forEach((button)=>{
+  button.addEventListener('click',(e)=>{
+    if(button.getAttribute('href') === '#'){
+      e.preventDefault();
+      alert('Acá conectamos el checkout de Hotmart cuando tengas el link final.');
+    }
+  });
+});
+
+</script>
+</body>
+</html>
