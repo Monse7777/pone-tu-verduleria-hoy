@@ -548,6 +548,86 @@
   .book-mockup{width:min(250px,68vw)}
 }
 
+
+/* Mockup final libro + celular */
+.final-product-mockup{
+  position:relative;
+  width:min(430px,100%);
+  min-height:520px;
+  margin:0 auto;
+  padding:22px 70px 24px 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+.final-product-mockup .final-book{
+  position:relative;
+  width:min(290px,78%);
+  transform:perspective(900px) rotateY(-7deg) rotateZ(-1deg);
+  filter:drop-shadow(0 24px 24px rgba(18,63,52,.20));
+  z-index:1
+}
+.final-product-mockup .final-book:before{
+  content:"";
+  position:absolute;
+  top:8px;
+  right:-12px;
+  width:15px;
+  height:calc(100% - 15px);
+  background:linear-gradient(90deg,#e9e2d4,#fff 45%,#d5ccbc);
+  border-radius:0 5px 5px 0;
+  z-index:-1
+}
+.final-product-mockup .final-book img{
+  display:block;
+  width:100%;
+  border-radius:3px 7px 7px 3px
+}
+.final-product-mockup .final-phone{
+  position:absolute;
+  right:8px;
+  bottom:42px;
+  width:150px;
+  padding:7px;
+  border-radius:28px;
+  background:#101515;
+  border:2px solid #303636;
+  box-shadow:0 20px 32px rgba(18,32,28,.30);
+  transform:rotate(3deg);
+  z-index:2
+}
+.final-product-mockup .final-phone img{
+  display:block;
+  width:100%;
+  border-radius:21px
+}
+.final-product-mockup .final-phone-notch{
+  position:absolute;
+  top:8px;
+  left:50%;
+  width:48%;
+  height:15px;
+  transform:translateX(-50%);
+  background:#090d0d;
+  border-radius:0 0 11px 11px;
+  z-index:3
+}
+@media(max-width:680px){
+  .final-product-mockup{
+    min-height:410px;
+    width:min(360px,100%);
+    padding:10px 54px 18px 0
+  }
+  .final-product-mockup .final-book{width:min(235px,75%)}
+  .final-product-mockup .final-phone{
+    width:122px;
+    right:2px;
+    bottom:30px;
+    border-radius:23px
+  }
+  .final-product-mockup .final-phone img{border-radius:17px}
+}
+
 </style>
 </head>
 <body>
@@ -694,9 +774,13 @@
           </div>
         </div>
 
-        <div class="offer-mockup" aria-label="Mockup del libro Poné tu Verdulería Hoy con José">
-          <div class="book-mockup">
-            <img src="assets/cover.webp" alt="Portada del libro Poné tu Verdulería Hoy con José" />
+        <div class="offer-mockup final-product-mockup" aria-label="Mockup del libro y versión digital Poné tu Verdulería Hoy con José">
+          <div class="final-book">
+            <img src="assets/cover.webp" alt="Libro Poné tu Verdulería Hoy con José" />
+          </div>
+          <div class="final-phone" aria-hidden="true">
+            <div class="final-phone-notch"></div>
+            <img src="assets/cover.webp" alt="" />
           </div>
         </div>
       </div>
