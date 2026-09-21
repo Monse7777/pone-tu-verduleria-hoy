@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3BNJ88XWZW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3BNJ88XWZW');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>José el Verdulero</title>
+  <meta name="description" content="El libro y la calculadora de José el Verdulero.">
+  <meta name="theme-color" content="#123f34">
+  <style>
+    :root{--cream:#f4efe2;--paper:#fbf8ef;--green:#123f34;--yellow:#e3b63e;--red:#a63d2f;--ink:#18342e;--muted:#66736e;--line:rgba(18,63,52,.14);--shadow:0 22px 60px rgba(26,53,43,.16)}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;padding:28px 16px}
+    a{text-decoration:none;color:inherit}
+    .hub{width:min(100%,430px);text-align:center}
+    .portrait{width:118px;height:118px;border-radius:50%;overflow:hidden;margin:0 auto 18px;border:5px solid rgba(255,255,255,.8);box-shadow:0 12px 34px rgba(26,53,43,.14);background:#e9dfbd}
+    .portrait img{width:100%;height:100%;object-fit:cover;object-position:center 34%}
+    .eyebrow{font-size:10px;letter-spacing:.17em;font-weight:900;color:var(--red);margin-bottom:10px}
+    h1{margin:0;color:var(--green);font-size:42px;line-height:.98;letter-spacing:-.045em}
+    h1 em{font-family:Georgia,serif;font-weight:400;color:var(--red)}
+    .intro{margin:14px auto 24px;max-width:360px;color:var(--muted);font-size:15px;line-height:1.5}
+    .options{display:grid;gap:12px}
+    .card{display:flex;align-items:center;text-align:left;gap:14px;padding:17px 18px;border-radius:16px;border:1px solid var(--line);box-shadow:0 8px 24px rgba(26,53,43,.08);transition:transform .15s ease,box-shadow .15s ease}
+    .card:active{transform:scale(.985)}
+    .card.primary{background:var(--green);color:#fff}
+    .card.secondary{background:var(--paper);color:var(--green)}
+    .icon{flex:0 0 48px;width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:24px;background:var(--yellow)}
+    .secondary .icon{background:#efe4bd}
+    .copy{min-width:0;flex:1}
+    .copy small{display:block;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;opacity:.72;margin-bottom:3px}
+    .copy strong{display:block;font-size:17px;line-height:1.2}
+    .copy span{display:block;font-size:12px;margin-top:4px;opacity:.78}
+    .arrow{font-size:22px;font-weight:900;opacity:.65}
+    .note{margin-top:18px;font-size:11px;color:#7a817d}
+    @media(max-width:420px){
+      body{padding:22px 14px}
+      .portrait{width:104px;height:104px;margin-bottom:15px}
+      h1{font-size:38px}
+      .intro{font-size:14px;margin-bottom:20px}
+      .card{padding:15px 15px}
+    }
+  </style>
+</head>
+<body>
+  <main class="hub">
+    <div class="portrait"><img src="/assets/jose-imagen.png" alt="José"></div>
+    <div class="eyebrow">JOSÉ EL VERDULERO</div>
+    <h1>¿Qué querés hacer <em>hoy?</em></h1>
+    <p class="intro">Elegí una opción. Podés conocer el libro de José o usar gratis su calculadora para tus compras.</p>
+
+    <div class="options">
+      <a id="bookLink" class="card primary" href="/">
+        <div class="icon">📕</div>
+        <div class="copy">
+          <small>Libro digital · $12.900</small>
+          <strong>Poné tu Verdulería Hoy con José</strong>
+          <span>Guía práctica para empezar o mejorar tu negocio.</span>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a id="calcLink" class="card secondary" href="https://la-calculadora-de-jose.vercel.app/">
+        <div class="icon">🧮</div>
+        <div class="copy">
+          <small>Herramienta gratis</small>
+          <strong>La Calculadora de José</strong>
+          <span>Calculá costos, gastos, merma y ganancia.</span>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </div>
+
+    <div class="note">Dos herramientas de José para ayudarte a manejar mejor tu verdulería.</div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const tracked = new URLSearchParams(params);
+    tracked.set('utm_content','hub_libro');
+    document.getElementById('bookLink').href = '/?' + tracked.toString();
+
+    const calc = new URL('https://la-calculadora-de-jose.vercel.app/');
+    params.forEach((v,k)=>calc.searchParams.set(k,v));
+    calc.searchParams.set('utm_content','hub_calculadora');
+    document.getElementById('calcLink').href = calc.toString();
+
+    document.getElementById('bookLink').addEventListener('click',()=>{
+      if(typeof gtag==='function') gtag('event','hub_click',{destination:'libro'});
+    });
+    document.getElementById('calcLink').addEventListener('click',()=>{
+      if(typeof gtag==='function') gtag('event','hub_click',{destination:'calculadora'});
+    });
+  </script>
+</body>
+</html>
