@@ -633,6 +633,34 @@
 .final-product-mockup{min-height:0!important;padding:0!important;display:flex!important;align-items:center;justify-content:center}
 .final-product-image{display:block;width:min(420px,100%);height:auto;object-fit:contain;filter:drop-shadow(0 20px 26px rgba(18,63,52,.14))}
 @media(max-width:680px){.final-product-image{width:min(320px,88vw)}}
+
+/* Oferta final: texto → mockup → compra */
+.offer-wrap{
+  grid-template-columns:1.08fr .92fr;
+  grid-template-areas:"copy mockup" "purchase mockup";
+  align-items:center;
+  row-gap:18px
+}
+.offer-copy{grid-area:copy}
+.final-product-mockup{grid-area:mockup}
+.final-purchase{grid-area:purchase;margin:0;max-width:650px}
+@media(max-width:900px){
+  .offer-wrap{
+    grid-template-columns:1fr;
+    grid-template-areas:"copy" "mockup" "purchase";
+    gap:20px
+  }
+  .offer-copy{order:initial}
+  .offer-mockup{order:initial;padding:0}
+  .final-purchase{margin:0 auto;width:100%}
+}
+@media(max-width:680px){
+  .offer-wrap{gap:16px}
+  .final-product-mockup{padding:0!important;margin:4px auto 2px}
+  .final-product-image{width:min(340px,94vw)}
+  .final-purchase{margin-top:0}
+}
+
 </style>
 </head>
 <body>
@@ -756,30 +784,23 @@
           <div class="eyebrow">LLEVATE EL LIBRO</div>
           <h2>Tu primer paso,<br><em>de la mano de José.</em></h2>
           <p>Un libro claro y práctico para el que quiere <strong>abrir su primera verdulería</strong> o para el que ya vende y quiere <strong>ordenar mejor sus números</strong>. Aprendé a <strong>comprar con criterio</strong>, <strong>calcular costos y ganancias</strong>, poner precios sin regalar margen y entender si <em>realmente estás ganando plata.</em></p>
-
-          <ul class="offer-list">
-            <li><strong>55 páginas y 13 capítulos</strong> explicados paso a paso.</li>
-            <li><strong>Tareas prácticas</strong> al final de cada capítulo.</li>
-            <li><strong>Acceso a la Calculadora de José</strong> como herramienta de apoyo.</li>
-            <li>Consejos para <strong>comprar mejor, poner precios y evitar errores clásicos</strong>.</li>
-          </ul>
-
-          <div class="section-purchase final-purchase">
-            <div class="section-purchase-top">
-              <span class="launch-pill">PRECIO LANZAMIENTO</span>
-              <div class="price-stage">
-                <strong>$12.900</strong>
-                <span class="price-currency">ARS</span>
-              </div>
-            </div>
-            <div class="pay-once">Pago único · acceso inmediato</div>
-            <a class="btn btn-primary purchase-cta checkout-button" href="#" data-checkout><span>QUIERO MI COPIA</span></a>
-            <div class="purchase-note">PDF digital · acceso inmediato</div>
-          </div>
         </div>
 
         <div class="offer-mockup final-product-mockup" aria-label="Mockup del libro y versión digital Poné tu Verdulería Hoy con José">
           <img id="finalProductMockup" class="final-product-image" src="assets/libro-portadas.png" alt="Libro Poné tu Verdulería Hoy con José junto a un celular" />
+        </div>
+
+        <div class="section-purchase final-purchase">
+          <div class="section-purchase-top">
+            <span class="launch-pill">PRECIO LANZAMIENTO</span>
+            <div class="price-stage">
+              <strong>$12.900</strong>
+              <span class="price-currency">ARS</span>
+            </div>
+          </div>
+          <div class="pay-once">Pago único · acceso inmediato</div>
+          <a class="btn btn-primary purchase-cta checkout-button" href="#" data-checkout><span>QUIERO MI COPIA</span></a>
+          <div class="purchase-note">PDF digital · acceso inmediato</div>
         </div>
       </div>
     </section>
