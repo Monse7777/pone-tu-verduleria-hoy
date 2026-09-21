@@ -646,7 +646,7 @@
         </div>
         <div class="hero-visual">
           <div class="hero-photo">
-            <img id="joseHero" alt="José sosteniendo el libro Poné tu Verdulería Hoy con José" />
+            <img id="joseHero" src="assets/jose-imagen.png" alt="José sosteniendo el libro Poné tu Verdulería Hoy con José" />
           </div>
         </div>
         <div class="hero-buy">
@@ -699,7 +699,7 @@
     <section class="section includes-section">
       <div class="wrap includes-grid">
         <div class="includes-media">
-          <img src="assets/libro-celular-section.webp" alt="Libro Poné tu Verdulería Hoy con José junto a un celular" />
+          <img src="assets/libros-mostrador.png" alt="Libro Poné tu Verdulería Hoy con José junto a un celular" />
         </div>
         <div class="includes-copy">
           <div class="eyebrow">QUÉ INCLUYE EL LIBRO</div>
@@ -780,7 +780,7 @@
         </div>
 
         <div class="offer-mockup final-product-mockup" aria-label="Mockup del libro y versión digital Poné tu Verdulería Hoy con José">
-          <img id="finalProductMockup" class="final-product-image" alt="Libro Poné tu Verdulería Hoy con José junto a un celular" />
+          <img id="finalProductMockup" class="final-product-image" src="assets/libro-portadas.png" alt="Libro Poné tu Verdulería Hoy con José junto a un celular" />
         </div>
       </div>
     </section>
@@ -809,20 +809,6 @@ document.querySelectorAll('[data-checkout]').forEach((button)=>{
 
 </script>
 
-<script>
-(async()=>{
-  const parts=await Promise.all([
-    'assets/jose_tiny_01.txt',
-    'assets/jose_tiny_02.txt',
-    'assets/jose_tiny_03.txt',
-    'assets/jose_tiny_04.txt',
-    'assets/jose_tiny_05.txt',
-    'assets/jose_tiny_06.txt'
-  ].map(async u => (await (await fetch(u)).text()).trim()));
-  const img=document.getElementById('joseHero');
-  if(img) img.src='data:image/webp;base64,'+parts.join('');
-})().catch(console.error);
-</script>
 
 
 <script>
@@ -839,18 +825,6 @@ document.querySelectorAll('[data-checkout]').forEach((button)=>{
 
 
 
-<script>
-(async()=>{
-  const parts=await Promise.all([
-    'assets/final_exact320_01.txt',
-    'assets/final_exact320_02.txt',
-    'assets/final_exact320_03.txt',
-    'assets/final_exact320_04.txt'
-  ].map(async u => (await (await fetch(u)).text()).trim()));
-  const img=document.getElementById('finalProductMockup');
-  if(img) img.src='data:image/webp;base64,'+parts.join('');
-})().catch(console.error);
-</script>
 
 </body>
 </html>
