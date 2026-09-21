@@ -2,17 +2,17 @@
   "redirects": [
     {
       "source": "/ig",
-      "destination": "/?utm_source=instagram&utm_medium=organic_social&utm_campaign=lanzamiento_jose&utm_content=bio",
+      "destination": "/jose?utm_source=instagram&utm_medium=organic_social&utm_campaign=lanzamiento_jose&utm_content=bio",
       "permanent": false
     },
     {
       "source": "/fb",
-      "destination": "/?utm_source=facebook&utm_medium=organic_social&utm_campaign=lanzamiento_jose&utm_content=bio",
+      "destination": "/jose?utm_source=facebook&utm_medium=organic_social&utm_campaign=lanzamiento_jose&utm_content=bio",
       "permanent": false
     },
     {
       "source": "/tt",
-      "destination": "/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=lanzamiento_jose&utm_content=bio",
+      "destination": "/jose?utm_source=tiktok&utm_medium=organic_social&utm_campaign=lanzamiento_jose&utm_content=bio",
       "permanent": false
     }
   ]
