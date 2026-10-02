@@ -904,6 +904,7 @@
   const joseEvent = new URLSearchParams(window.location.search).get('jose_event');
   if (!joseEvent) return;
 
+  // Conserva la atribución hasta Hotmart.
   document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach((link) => {
     try {
       const url = new URL(link.href);
@@ -911,6 +912,27 @@
       link.href = url.toString();
     } catch {}
   });
+
+  // Confirma el clic sólo cuando la landing se abrió en un navegador visible.
+  let tracked = false;
+  const confirmOpen = () => {
+    if (tracked || document.visibilityState !== 'visible') return;
+    tracked = true;
+    window.setTimeout(() => {
+      const beacon = new Image();
+      beacon.src =
+        'https://jose-facebook-automation.vercel.app/t/open/' +
+        encodeURIComponent(joseEvent) +
+        '?v=' + Date.now();
+    }, 700);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', confirmOpen, { once: true });
+  } else {
+    confirmOpen();
+  }
+  document.addEventListener('visibilitychange', confirmOpen);
 })();
 </script>
 
