@@ -901,14 +901,16 @@
 
 <script>
 (() => {
-  const joseEvent = new URLSearchParams(window.location.search).get('jose_event');
+  const params = new URLSearchParams(window.location.search);
+  const joseEvent = params.get('jose_event');
+  const joseSource = params.get('jose_source') === 'public' ? 'public' : 'dm';
   if (!joseEvent) return;
 
-  // Conserva la atribución hasta Hotmart.
+  // Conserva la atribución hasta Hotmart, incluyendo el origen del clic.
   document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach((link) => {
     try {
       const url = new URL(link.href);
-      url.searchParams.set('sck', 'josefb_' + joseEvent);
+      url.searchParams.set('sck', 'josefb_' + joseSource + '_' + joseEvent);
       link.href = url.toString();
     } catch {}
   });
@@ -923,7 +925,8 @@
       beacon.src =
         'https://jose-facebook-automation.vercel.app/t/open/' +
         encodeURIComponent(joseEvent) +
-        '?v=' + Date.now();
+        '?src=' + encodeURIComponent(joseSource) +
+        '&v=' + Date.now();
     }, 700);
   };
 
