@@ -898,5 +898,21 @@
   });
 </script>
 
+
+<script>
+(() => {
+  const joseEvent = new URLSearchParams(window.location.search).get('jose_event');
+  if (!joseEvent) return;
+
+  document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach((link) => {
+    try {
+      const url = new URL(link.href);
+      url.searchParams.set('sck', 'josefb_' + joseEvent);
+      link.href = url.toString();
+    } catch {}
+  });
+})();
+</script>
+
 </body>
 </html>
