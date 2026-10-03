@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pagar por transferencia · José Verdulero</title>
+  <meta name="description" content="Pagá la guía por transferencia y enviá tu comprobante." />
+  <meta name="theme-color" content="#123f34" />
+  <style>
+    :root{
+      --cream:#f4efe2;--paper:#fbf8ef;--green:#123f34;--yellow:#e3b63e;
+      --red:#a63d2f;--ink:#18342e;--muted:#6f746d;--line:rgba(18,63,52,.16);
+      --shadow:0 22px 60px rgba(26,53,43,.14)
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.45}
+    button,input{font:inherit}
+    .shell{width:min(680px,calc(100% - 28px));margin:0 auto;padding:34px 0 54px}
+    .brand{display:flex;align-items:center;gap:11px;margin-bottom:20px}
+    .mark{width:42px;height:42px;border-radius:13px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:900}
+    .brand b{display:block;color:var(--green);font-size:14px}
+    .brand span{font-size:11px;color:var(--muted)}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:30px}
+    .eyebrow{font-size:10px;font-weight:900;letter-spacing:.14em;color:var(--red);margin-bottom:9px}
+    h1{margin:0;color:var(--green);font-size:clamp(34px,7vw,52px);line-height:1;letter-spacing:-.04em}
+    .intro{margin:14px 0 0;color:var(--muted);font-size:15px}
+    .price{margin:24px 0 18px;padding:18px;border-radius:18px;background:#fff;border:1px solid var(--line);text-align:center}
+    .price span{display:block;font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--red)}
+    .price strong{display:block;margin-top:3px;font-size:44px;line-height:1;color:var(--green)}
+    .bank-box{display:grid;gap:11px;padding:18px;border-radius:18px;background:#eef5f0;border:1px solid #cfe1d5}
+    .row{display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .row small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:900}
+    .row strong{display:block;margin-top:2px;font-size:16px;overflow-wrap:anywhere}
+    .copy{border:0;background:var(--green);color:#fff;border-radius:11px;padding:9px 12px;font-size:11px;font-weight:900;white-space:nowrap}
+    .steps{margin:23px 0 15px;font-weight:900;color:var(--green)}
+    form{display:grid;gap:14px}
+    label{display:grid;gap:7px;font-size:12px;font-weight:900}
+    input[type=email],input[type=file]{width:100%;border:1px solid var(--line);border-radius:13px;background:#fff;padding:13px;color:var(--ink)}
+    input[type=file]{font-size:12px}
+    .submit{border:0;border-radius:14px;background:var(--green);color:#fff;padding:15px 18px;font-weight:900;font-size:15px}
+    .submit:disabled{opacity:.6}
+    .note{font-size:11px;color:var(--muted);text-align:center;margin-top:-4px}
+    .status{margin-top:14px;padding:14px 15px;border-radius:13px;font-size:13px;display:none}
+    .status.show{display:block}
+    .status.ok{background:#eef7f1;color:#25583c;border:1px solid #cde5d5}
+    .status.error{background:#fff0ed;color:#83362d;border:1px solid #edccc5}
+    .disabled{display:none;text-align:center;padding:30px 10px}
+    .disabled.show{display:block}
+    .disabled strong{display:block;font-size:19px;color:var(--green);margin-bottom:7px}
+    .back{display:inline-block;margin-top:14px;color:var(--green);font-weight:900;font-size:12px}
+    .honeypot{position:absolute!important;left:-9999px!important;opacity:0!important;pointer-events:none!important}
+    @media(max-width:560px){
+      .shell{padding-top:20px}
+      .card{padding:21px;border-radius:20px}
+      .row{align-items:flex-start}
+      .price strong{font-size:40px}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="brand">
+      <div class="mark">J</div>
+      <div><b>José Verdulero</b><span>Poné tu verdulería hoy con José</span></div>
+    </div>
+
+    <section class="card">
+      <div class="eyebrow">PAGO SIMPLE</div>
+      <h1>Pagá por transferencia</h1>
+      <p class="intro">Transferí el importe, dejá tu email y adjuntá el comprobante. Nada de cuentas ni formularios largos.</p>
+
+      <div id="disabled" class="disabled">
+        <strong>Esta opción todavía no está habilitada.</strong>
+        <span>Por ahora podés comprar la guía con el medio de pago habitual.</span><br />
+        <a class="back" href="/">VOLVER A LA GUÍA</a>
+      </div>
+
+      <div id="content" hidden>
+        <div class="price">
+          <span>IMPORTE A TRANSFERIR</span>
+          <strong id="price">$12.900</strong>
+        </div>
+
+        <div class="bank-box">
+          <div class="row">
+            <div>
+              <small>Alias</small>
+              <strong id="alias">—</strong>
+            </div>
+            <button id="copyAlias" class="copy" type="button">COPIAR</button>
+          </div>
+          <div class="row">
+            <div>
+              <small>Titular</small>
+              <strong id="holder">—</strong>
+            </div>
+          </div>
+          <div class="row" id="bankRow">
+            <div>
+              <small>Banco / billetera</small>
+              <strong id="bank">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="steps">Cuando termines, mandanos el comprobante:</div>
+
+        <form id="form">
+          <label>
+            Tu email
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="tu@email.com" required />
+          </label>
+
+          <label>
+            Comprobante
+            <input id="receipt" name="receipt" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required />
+          </label>
+
+          <input class="honeypot" tabindex="-1" autocomplete="off" name="website" />
+
+          <button id="submit" class="submit" type="submit">ENVIAR COMPROBANTE</button>
+          <div class="note">JPG, PNG, WEBP o PDF · máximo 10 MB.</div>
+        </form>
+
+        <div id="status" class="status"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (() => {
+    const API = 'https://jose-facebook-automation.vercel.app/api/transfer';
+    const qs = new URLSearchParams(location.search);
+    let config = null;
+
+    const money = (amount, currency) => {
+      try {
+        return new Intl.NumberFormat('es-AR', {
+          style: 'currency',
+          currency: currency || 'ARS',
+          maximumFractionDigits: 0
+        }).format(amount);
+      } catch {
+        return '$' + Number(amount || 0).toLocaleString('es-AR');
+      }
+    };
+
+    async function load() {
+      try {
+        const res = await fetch(API + '/config', { cache: 'no-store' });
+        config = await res.json();
+        if (!res.ok || !config.enabled) {
+          document.getElementById('disabled').classList.add('show');
+          return;
+        }
+
+        document.getElementById('content').hidden = false;
+        document.getElementById('price').textContent = money(config.amount, config.currency);
+        document.getElementById('alias').textContent = config.alias || '—';
+        document.getElementById('holder').textContent = config.holder || '—';
+        document.getElementById('bank').textContent = config.bank || '—';
+        if (!config.bank) document.getElementById('bankRow').style.display = 'none';
+      } catch {
+        document.getElementById('disabled').classList.add('show');
+      }
+    }
+
+    document.getElementById('copyAlias').addEventListener('click', async () => {
+      if (!config?.alias) return;
+      await navigator.clipboard.writeText(config.alias);
+      const button = document.getElementById('copyAlias');
+      button.textContent = 'COPIADO ✓';
+      setTimeout(() => button.textContent = 'COPIAR', 1600);
+    });
+
+    document.getElementById('form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const button = document.getElementById('submit');
+      const status = document.getElementById('status');
+      button.disabled = true;
+      button.textContent = 'ENVIANDO…';
+      status.className = 'status';
+      status.textContent = '';
+
+      try {
+        const form = new FormData(event.currentTarget);
+        if (qs.get('jose_event')) form.set('jose_event', qs.get('jose_event'));
+        const rawSource = qs.get('jose_source') || qs.get('utm_source') || 'organic';
+        form.set('source', String(rawSource).slice(0, 80));
+
+        const res = await fetch(API + '/orders', {
+          method: 'POST',
+          body: form
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'No pudimos recibir el comprobante.');
+
+        event.currentTarget.reset();
+        status.className = 'status ok show';
+        status.textContent = 'Listo. Recibimos tu comprobante. Cuando confirmemos el pago te enviamos la guía al email que dejaste.';
+        button.textContent = 'COMPROBANTE ENVIADO ✓';
+      } catch (error) {
+        status.className = 'status error show';
+        status.textContent = error?.message || 'Hubo un problema. Probá de nuevo.';
+        button.disabled = false;
+        button.textContent = 'ENVIAR COMPROBANTE';
+      }
+    });
+
+    load();
+  })();
+  </script>
+</body>
+</html>
