@@ -21,3 +21,4 @@ module.exports = function handler(req, res) {
 ${code ? `<code>received=true${id ? " · account_id=" + id : ""}${state ? " · state=" + state : ""}</code>` : ""}
 </main></body></html>`);
 };
+
