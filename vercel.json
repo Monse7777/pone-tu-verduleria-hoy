@@ -1,4 +1,21 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "alias": [
+    "accionfruit.pp.ua"
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": "accionfruit.pp.ua"
+        }
+      ],
+      "destination": "/accion-fruit/"
+    }
+  ],
   "redirects": [
     {
       "source": "/ig",
