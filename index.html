@@ -889,7 +889,9 @@
 
 <script>
   document.addEventListener('click', function (event) {
-    const link = event.target.closest('a[href*="pay.hotmart.com"]');
+    const link = event.target.closest(
+      'a[data-jose-checkout="1"], a[href*="pay.hotmart.com"]'
+    );
     if (!link) return;
 
     const params = new URLSearchParams(window.location.search);
@@ -905,27 +907,6 @@
         items: [{ item_name: 'Poné tu Verdulería Hoy con José' }]
       });
     }
-
-    // Métrica propia en tiempo real: no depende del retraso de GA4.
-    if (joseEvent) {
-      const trackingUrl =
-        'https://jose-facebook-automation.vercel.app/t/checkout/' +
-        encodeURIComponent(joseEvent) +
-        '?src=' + encodeURIComponent(joseSource) +
-        '&v=' + Date.now();
-
-      try {
-        if (navigator.sendBeacon) {
-          navigator.sendBeacon(trackingUrl);
-        } else {
-          const beacon = new Image();
-          beacon.src = trackingUrl;
-        }
-      } catch {
-        const beacon = new Image();
-        beacon.src = trackingUrl;
-      }
-    }
   });
 </script>
 
@@ -937,12 +918,27 @@
   const joseSource = params.get('jose_source') === 'public' ? 'public' : 'dm';
   if (!joseEvent) return;
 
-  // Conserva la atribución hasta Hotmart, incluyendo el origen del clic.
+  // Para visitas atribuidas a Facebook, todo botón de compra pasa primero
+  // por nuestro servidor. Ahí se registra el clic y recién después se
+  // redirige a Hotmart. Esto evita depender de sendBeacon.
   document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach((link) => {
     try {
-      const url = new URL(link.href);
-      url.searchParams.set('sck', 'josefb_' + joseSource + '_' + joseEvent);
-      link.href = url.toString();
+      const hotmartUrl = new URL(link.href);
+      hotmartUrl.searchParams.set(
+        'sck',
+        'josefb_' + joseSource + '_' + joseEvent
+      );
+
+      const trackerUrl = new URL(
+        'https://jose-facebook-automation.vercel.app/t/checkout/' +
+        encodeURIComponent(joseEvent)
+      );
+      trackerUrl.searchParams.set('src', joseSource);
+      trackerUrl.searchParams.set('go', '1');
+      trackerUrl.searchParams.set('to', hotmartUrl.toString());
+
+      link.dataset.joseCheckout = '1';
+      link.href = trackerUrl.toString();
     } catch {}
   });
 
