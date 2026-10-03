@@ -966,5 +966,85 @@
 })();
 </script>
 
+
+<!-- LANDING PROGRESS TRACKING -->
+<script>
+(() => {
+  const params = new URLSearchParams(window.location.search);
+  const joseEvent = params.get('jose_event');
+  const joseSource = params.get('jose_source') === 'public' ? 'public' : 'dm';
+  if (!joseEvent) return;
+
+  const sent = new Set();
+
+  const mark = (step) => {
+    if (sent.has(step) || document.visibilityState !== 'visible') return;
+    sent.add(step);
+    const beacon = new Image();
+    beacon.src =
+      'https://jose-facebook-automation.vercel.app/t/progress/' +
+      encodeURIComponent(joseEvent) +
+      '?step=' + encodeURIComponent(step) +
+      '&src=' + encodeURIComponent(joseSource) +
+      '&v=' + Date.now();
+  };
+
+  const observeVisible = (selector, step) => {
+    const element = document.querySelector(selector);
+    if (!element) return;
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        const entry = entries[0];
+        if (entry && entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          mark(step);
+          observer.disconnect();
+        }
+      }, { threshold: [0.5] });
+      observer.observe(element);
+      return;
+    }
+
+    const fallback = () => {
+      const rect = element.getBoundingClientRect();
+      const visible = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+      if (visible >= Math.min(rect.height, window.innerHeight) * 0.5) {
+        mark(step);
+        window.removeEventListener('scroll', fallback);
+        window.removeEventListener('resize', fallback);
+      }
+    };
+    window.addEventListener('scroll', fallback, { passive: true });
+    window.addEventListener('resize', fallback);
+    fallback();
+  };
+
+  const checkHalfPage = () => {
+    const root = document.documentElement;
+    const pageHeight = Math.max(root.scrollHeight, document.body.scrollHeight);
+    if (!pageHeight) return;
+    if (window.scrollY + window.innerHeight >= pageHeight * 0.5) {
+      mark('page_50');
+      window.removeEventListener('scroll', checkHalfPage);
+      window.removeEventListener('resize', checkHalfPage);
+    }
+  };
+
+  const start = () => {
+    observeVisible('.hero-buy .purchase-card', 'hero_offer');
+    observeVisible('.final-purchase', 'final_offer');
+    window.addEventListener('scroll', checkHalfPage, { passive: true });
+    window.addEventListener('resize', checkHalfPage);
+    checkHalfPage();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+})();
+</script>
+
 </body>
 </html>
