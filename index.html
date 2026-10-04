@@ -1222,11 +1222,13 @@
 
   window.addEventListener('scroll', updateMilestones, { passive:true });
   window.addEventListener('resize', updateMilestones);
+  let lastHeartbeatBucket = 0;
   const timer = window.setInterval(() => {
     updateMilestones();
-    if (engagementSeconds() > 0) send('engagement');
-    if (engagementSeconds() >= 60 && sent.has('scroll_90')) {
-      window.clearInterval(timer);
+    const bucket = Math.floor(engagementSeconds() / 30);
+    if (bucket > lastHeartbeatBucket) {
+      lastHeartbeatBucket = bucket;
+      send('engagement');
     }
   }, 5000);
 
