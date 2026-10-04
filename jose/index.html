@@ -89,6 +89,23 @@
 
   <script>
     const params = new URLSearchParams(location.search);
+
+    // Si el perfil no trae UTM, intentamos conservar la red que abrió este hub.
+    if (!params.get('utm_source')) {
+      let host = '';
+      try { host = document.referrer ? new URL(document.referrer).hostname.toLowerCase() : ''; } catch {}
+      if (host.includes('instagram.com') || host.includes('many.chat')) {
+        params.set('utm_source','instagram');
+        params.set('utm_medium','organic_social');
+      } else if (host.includes('tiktok.com')) {
+        params.set('utm_source','tiktok');
+        params.set('utm_medium','organic_social');
+      } else if (host.includes('facebook.com') || host.includes('messenger.com')) {
+        params.set('utm_source','facebook');
+        params.set('utm_medium','organic_social');
+      }
+    }
+
     const tracked = new URLSearchParams(params);
     tracked.set('utm_content','hub_libro');
     document.getElementById('bookLink').href = '/?' + tracked.toString();

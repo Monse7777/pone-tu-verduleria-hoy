@@ -1046,5 +1046,253 @@
 })();
 </script>
 
+
+
+<!-- UNIFIED LANDING TRACKING: Facebook + Instagram + TikTok + direct -->
+<script>
+(() => {
+  const TRACK_URL = 'https://jose-facebook-automation.vercel.app/api/landing/track';
+  const params = new URLSearchParams(location.search);
+  const joseEvent = params.get('jose_event');
+  const joseSource = params.get('jose_source') === 'public' ? 'public' : 'dm';
+
+  const uuid = () => {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+      return window.crypto.randomUUID();
+    }
+    const bytes = new Uint8Array(16);
+    window.crypto.getRandomValues(bytes);
+    bytes[6] = (bytes[6] & 15) | 64;
+    bytes[8] = (bytes[8] & 63) | 128;
+    const hex = [...bytes].map(b => b.toString(16).padStart(2,'0')).join('');
+    return hex.slice(0,8)+'-'+hex.slice(8,12)+'-'+hex.slice(12,16)+'-'+hex.slice(16,20)+'-'+hex.slice(20);
+  };
+
+  let visitorId;
+  try {
+    visitorId = localStorage.getItem('jose_visitor_id');
+    if (!visitorId) {
+      visitorId = uuid();
+      localStorage.setItem('jose_visitor_id', visitorId);
+    }
+  } catch {
+    visitorId = uuid();
+  }
+
+  let sessionId;
+  try {
+    sessionId = sessionStorage.getItem('jose_landing_session_id');
+    if (!sessionId) {
+      sessionId = uuid();
+      sessionStorage.setItem('jose_landing_session_id', sessionId);
+    }
+  } catch {
+    sessionId = uuid();
+  }
+
+  const referrer = document.referrer || '';
+  const refHost = (() => {
+    try { return referrer ? new URL(referrer).hostname.toLowerCase() : ''; }
+    catch { return ''; }
+  })();
+  const utmSource = (params.get('utm_source') || '').toLowerCase();
+  const utmMedium = (params.get('utm_medium') || '').toLowerCase();
+
+  const sourceInfo = (() => {
+    if (joseEvent) return { group:'facebook', detail:'facebook_comment_' + joseSource };
+
+    const raw = utmSource;
+    if (['facebook','fb','meta','messenger'].includes(raw)) {
+      return { group:'facebook', detail: raw || 'facebook_utm' };
+    }
+    if (['instagram','ig'].includes(raw)) {
+      return { group:'instagram', detail: raw || 'instagram_utm' };
+    }
+    if (raw === 'tiktok') {
+      return { group:'tiktok', detail:'tiktok_utm' };
+    }
+
+    if (refHost.includes('instagram.com') || refHost.includes('many.chat')) {
+      return { group:'instagram', detail: refHost.includes('many.chat') ? 'manychat' : 'instagram_referral' };
+    }
+    if (refHost.includes('tiktok.com')) {
+      return { group:'tiktok', detail:'tiktok_referral' };
+    }
+    if (
+      refHost.includes('facebook.com') ||
+      refHost.includes('messenger.com') ||
+      refHost.includes('fb.com')
+    ) {
+      return { group:'facebook', detail:'facebook_referral' };
+    }
+    if (!refHost || refHost === location.hostname.toLowerCase()) {
+      return { group:'direct', detail:'direct' };
+    }
+    return { group:'other', detail: refHost };
+  })();
+
+  let visibleStarted = document.visibilityState === 'visible' ? Date.now() : null;
+  let activeMs = 0;
+  let maxScroll = 0;
+  const sent = new Set();
+
+  const engagementSeconds = () => {
+    const current = visibleStarted ? Date.now() - visibleStarted : 0;
+    return Math.max(0, Math.round((activeMs + current) / 1000));
+  };
+
+  const scrollPercent = () => {
+    const root = document.documentElement;
+    const height = Math.max(root.scrollHeight, document.body.scrollHeight || 0);
+    if (!height) return 0;
+    return Math.max(0, Math.min(100, Math.round(((window.scrollY + window.innerHeight) / height) * 100)));
+  };
+
+  const payload = (event) => ({
+    event,
+    session_id: sessionId,
+    visitor_id: visitorId,
+    jose_event_id: joseEvent || null,
+    source_group: sourceInfo.group,
+    source_detail: sourceInfo.detail,
+    medium: utmMedium || null,
+    referrer: referrer || null,
+    landing_path: location.pathname,
+    utm_source: params.get('utm_source'),
+    utm_medium: params.get('utm_medium'),
+    utm_campaign: params.get('utm_campaign'),
+    utm_content: params.get('utm_content'),
+    engagement_seconds: engagementSeconds(),
+    scroll_percent: Math.max(maxScroll, scrollPercent())
+  });
+
+  const send = (event, beacon = false) => {
+    const body = JSON.stringify(payload(event));
+    if (beacon && navigator.sendBeacon) {
+      try {
+        navigator.sendBeacon(TRACK_URL, new Blob([body], { type:'text/plain;charset=UTF-8' }));
+        return;
+      } catch {}
+    }
+    fetch(TRACK_URL, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=UTF-8'},
+      body,
+      keepalive:true,
+      mode:'cors'
+    }).catch(() => {});
+  };
+
+  const sendOnce = (event) => {
+    if (sent.has(event)) return;
+    sent.add(event);
+    send(event);
+  };
+
+  const facebookProgress = (step) => {
+    if (!joseEvent) return;
+    fetch(
+      'https://jose-facebook-automation.vercel.app/t/progress/' +
+      encodeURIComponent(joseEvent) +
+      '?step=' + encodeURIComponent(step) +
+      '&src=' + encodeURIComponent(joseSource) +
+      '&v=' + Date.now(),
+      { method:'GET', keepalive:true, mode:'cors', cache:'no-store' }
+    ).catch(() => {});
+  };
+
+  send('open');
+
+  const updateMilestones = () => {
+    const seconds = engagementSeconds();
+    maxScroll = Math.max(maxScroll, scrollPercent());
+
+    if (seconds >= 10) sendOnce('engaged_10s');
+    if (seconds >= 30) sendOnce('engaged_30s');
+    if (seconds >= 60) sendOnce('engaged_60s');
+
+    if (maxScroll >= 25) sendOnce('scroll_25');
+    if (maxScroll >= 50) {
+      if (!sent.has('scroll_50')) facebookProgress('page_50');
+      sendOnce('scroll_50');
+    }
+    if (maxScroll >= 75) sendOnce('scroll_75');
+    if (maxScroll >= 90) sendOnce('scroll_90');
+  };
+
+  window.addEventListener('scroll', updateMilestones, { passive:true });
+  window.addEventListener('resize', updateMilestones);
+  const timer = window.setInterval(() => {
+    updateMilestones();
+    if (engagementSeconds() > 0) send('engagement');
+    if (engagementSeconds() >= 60 && sent.has('scroll_90')) {
+      window.clearInterval(timer);
+    }
+  }, 5000);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      if (visibleStarted) {
+        activeMs += Date.now() - visibleStarted;
+        visibleStarted = null;
+      }
+      updateMilestones();
+      send('engagement', true);
+    } else if (!visibleStarted) {
+      visibleStarted = Date.now();
+    }
+  });
+
+  window.addEventListener('pagehide', () => {
+    if (visibleStarted) {
+      activeMs += Date.now() - visibleStarted;
+      visibleStarted = null;
+    }
+    updateMilestones();
+    send('engagement', true);
+  });
+
+  const observe = (selector, eventName, fbStep) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry && entry.isIntersecting && entry.intersectionRatio >= .25) {
+          if (!sent.has(eventName) && fbStep) facebookProgress(fbStep);
+          sendOnce(eventName);
+          observer.disconnect();
+        }
+      }, { threshold:[.25] });
+      observer.observe(el);
+    }
+  };
+
+  observe('.hero-buy .purchase-card', 'hero_offer', 'hero_offer');
+  observe('.final-purchase', 'final_offer', 'final_offer');
+
+  const video = document.querySelector('.jose-video');
+  if (video) video.addEventListener('play', () => sendOnce('video_play'), { once:true });
+
+  if (!joseEvent) {
+    document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach((link) => {
+      try {
+        const url = new URL(link.href);
+        url.searchParams.set('sck', 'joseweb_' + sourceInfo.group + '_' + sessionId);
+        link.href = url.toString();
+      } catch {}
+    });
+  }
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[data-jose-checkout="1"], a[href*="pay.hotmart.com"]');
+    if (!link) return;
+    updateMilestones();
+    send('checkout', true);
+  }, true);
+
+  updateMilestones();
+})();
+</script>
+
 </body>
 </html>
