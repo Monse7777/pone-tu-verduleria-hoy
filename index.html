@@ -1222,15 +1222,16 @@
 
   window.addEventListener('scroll', updateMilestones, { passive:true });
   window.addEventListener('resize', updateMilestones);
-  let lastHeartbeatBucket = 0;
+  // Keep the useful engagement milestones without sending a heartbeat
+  // to the server every 30 seconds for as long as a visitor leaves the page open.
+  // After the first minute, scroll/visibility/pagehide events are enough to retain
+  // the important analytics while dramatically reducing serverless invocations.
   const timer = window.setInterval(() => {
     updateMilestones();
-    const bucket = Math.floor(engagementSeconds() / 30);
-    if (bucket > lastHeartbeatBucket) {
-      lastHeartbeatBucket = bucket;
-      send('engagement');
+    if (engagementSeconds() >= 60) {
+      window.clearInterval(timer);
     }
-  }, 5000);
+  }, 10000);
 
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
